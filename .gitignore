@@ -47,10 +47,9 @@ app.*.map.json
 .fvm/
 
 # Ignore non-CI golden files and failures
-test/**/goldens/**/*.*
-test/**/failures/**/*.*
-!test/**/goldens/ci/*.*
-!test/**/goldens/**/*.dart
+test/**/goldens/**/*.png
+test/**/failures/**/*.png
+!test/**/goldens/ci/*.png
 
 # DON'T INCLUDE IN HANDBOOK
 # Needed to include non-alchemist tests
