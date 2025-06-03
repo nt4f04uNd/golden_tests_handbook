@@ -1,0 +1,35 @@
+name: Flutter tests CI
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.2'
+          channel: 'stable'
+
+      - name: 📦 Install Dependencies
+        shell: bash
+        run: flutter pub get
+
+      - name: 🧪 Run Tests
+        shell: bash
+        run: flutter test --dart-define=CI=true test/goldens_platform_dependency/goldens_platform_dependency_alchemist_test.dart
+
+      # Uncomment the following lines if you want to run the Flutter test
+      # (which will always fail because it was generated on MacOS, and the CI runs on Linux)
+
+      # - name: 🧪 Run Tests
+      #   shell: bash
+      #   run: flutter test --dart-define=CI=true test/goldens_platform_dependency/goldens_platform_dependency_flutter_test.dart
