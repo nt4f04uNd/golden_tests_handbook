@@ -1,4 +1,4 @@
-name: Flutter tests CI
+name: Flutter tests CI - platform dependency
 
 on:
   push:
