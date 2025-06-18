@@ -12,7 +12,7 @@ class ConfirmButton extends StatelessWidget {
 
   const ConfirmButton({
     required this.onPressed,
-    this.state = ConfirmButtonState.disabled,
+    this.state = ConfirmButtonState.enabled,
     this.text = 'Confirm',
     this.icon,
     this.backgroundColor,
