@@ -14,7 +14,8 @@ jobs:
       - name: 📚 Git Checkout
         uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.1'
           channel: 'stable'
@@ -25,4 +26,12 @@ jobs:
 
       - name: 🧪 Run Tests
         shell: bash
-        run: flutter test --dart-define=CI=true test/goldens/
+        run: flutter test --no-pub --dart-define=CI=true test/goldens/
+
+      - name: 📁 Save diffs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diffs
+          path: test/goldens/failures
+          if-no-files-found: ignore
