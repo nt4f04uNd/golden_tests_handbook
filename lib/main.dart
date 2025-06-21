@@ -18,7 +18,7 @@ class App extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const _ConfirmButtonExample(),
+              const DelayedConfirmButton(),
               const SizedBox(height: 8.0),
               ConfettiButton(text: 'Wohoo!', onPressed: () {}),
             ],
@@ -29,14 +29,14 @@ class App extends StatelessWidget {
   }
 }
 
-class _ConfirmButtonExample extends StatefulWidget {
-  const _ConfirmButtonExample();
+class DelayedConfirmButton extends StatefulWidget {
+  const DelayedConfirmButton({super.key});
 
   @override
-  State<_ConfirmButtonExample> createState() => _ConfirmButtonExampleState();
+  State<DelayedConfirmButton> createState() => DelayedConfirmButtonState();
 }
 
-class _ConfirmButtonExampleState extends State<_ConfirmButtonExample> {
+class DelayedConfirmButtonState extends State<DelayedConfirmButton> {
   ConfirmButtonState buttonState = ConfirmButtonState.enabled;
 
   Timer? timer;
@@ -57,8 +57,11 @@ class _ConfirmButtonExampleState extends State<_ConfirmButtonExample> {
         setState(() {
           buttonState = ConfirmButtonState.loading;
         });
+
+        // Симулируем долгую операцию через таймер.
+        // В реальном мире тут мог бы быть, например, запрос в сеть.
         timer?.cancel();
-        timer = Timer(Durations.medium4, () {
+        timer = Timer(Duration(seconds: 1), () {
           setState(() {
             buttonState = ConfirmButtonState.enabled;
           });
